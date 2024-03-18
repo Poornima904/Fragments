@@ -1,0 +1,214 @@
+{
+  "_version": "1.59.0",
+  "sap.app": {
+    "id": "bankdet",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:lrop",
+      "version": "1.12.4",
+      "toolsId": "29174c21-ded1-49c0-a396-c7c784702fa5"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/my/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "odataVersion": "4.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "semantic-display": {
+          "semanticObject": "semantic",
+          "action": "display",
+          "title": "{{flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.120.8",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "bankdet.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "bankdetailsList",
+          "target": "bankdetailsList"
+        },
+        {
+          "pattern": "bankdetails({key}):?query:",
+          "name": "bankdetailsObjectPage",
+          "target": "bankdetailsObjectPage"
+        }
+      ],
+      "targets": {
+        "bankdetailsList": {
+          "type": "Component",
+          "id": "bankdetailsList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/bankdetails",
+              "variantManagement": "Page",
+              "navigation": {
+                "bankdetails": {
+                  "detail": {
+                    "route": "bankdetailsObjectPage"
+                  }
+                }
+              },
+              "controlConfiguration": {
+                "@com.sap.vocabularies.UI.v1.LineItem": {
+                  "columns": {
+                    "Col1": {
+                      "header": "frag1",
+                      "position": {
+                        "anchor": "DataField::bank_name",
+                        "placement": "After"
+                      },
+                      "template": "bankdet.ext.fragment.Col1"
+                    }
+                  },
+                  "actions": {
+                    "3": {
+                      "press": "bankdet.ext.controller.HandlerTAB1.methodTAB1",
+                      "visible": true,
+                      "enabled": true,
+                      "requiresSelection": false,
+                      "text": "TAB1"
+                    }
+                  }
+                }
+              },
+              "views": {
+                "paths": [
+                  {
+                    "key": "tableView",
+                    "annotationPath": "com.sap.vocabularies.UI.v1.SelectionPresentationVariant#tableView"
+                  },
+                  {
+                    "key": "1",
+                    "label": "view1",
+                    "template": "bankdet.ext.fragment.Frag2"
+                  },
+                  {
+                    "key": "4",
+                    "label": "fraglink",
+                    "template": "bankdet.ext.fragment.Fraglink"
+                  }
+                ]
+              },
+              "initialLoad": "Enabled"
+            }
+          }
+        },
+        "bankdetailsObjectPage": {
+          "type": "Component",
+          "id": "bankdetailsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "contextPath": "/bankdetails",
+              "navigation": {},
+              "content": {
+                "body": {
+                  "sections": {
+                    "Dropdownbtn": {
+                      "template": "bankdet.ext.fragment.Dropdownbtn",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "GeneratedFacet1"
+                      },
+                      "title": "ButtonDropDownFrag",
+                      "type": "XMLFragment"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "extends": {
+      "extensions": {
+        "sap.ui.controllerExtensions": {
+          "sap.fe.templates.ListReport.ListReportController": {
+            "controllerName": "bankdet.ext.fragment.Fraglink"
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

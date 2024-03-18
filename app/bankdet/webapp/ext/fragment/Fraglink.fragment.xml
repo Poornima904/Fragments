@@ -1,0 +1,29 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"
+	controllerName="sap.m.sample.Link.LinkGroup"
+	xmlns:l="sap.ui.layout"
+	xmlns:mvc="sap.ui.core.mvc">
+	<!-- <Button id = "btn" core:require="{ handler: 'bankdet/ext/fragment/Fraglink.controller'}" text="Fraglink" press="handler.onPress" /> -->
+	
+	<l:VerticalLayout id = "vl"
+		class="sapUiContentPadding"
+		width="100%">
+		<l:content>
+			<Link id = "l1"
+				text="dialogbox"
+				core:require="{ handler: 'bankdet/ext/fragment/Fraglink.controller'}"
+				press="handler.handleLinkPress" />
+			<Link id = "l2"
+				text="Disabled link"
+				enabled="false" />
+			<Link id = "l3"
+				text="OpenSAPHomepage"
+				href="http://www.sap.com" 
+				target="_blank"/>
+		</l:content>
+	</l:VerticalLayout>
+
+
+
+
+
+</core:FragmentDefinition>
